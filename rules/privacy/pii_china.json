@@ -1,0 +1,118 @@
+{
+  "rules": [
+    {
+      "rule_id": "PD001",
+      "rule_name": "中国大陆身份证号",
+      "pattern": "\\d{17}[\\dXx]",
+      "level": "critical",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 4,
+      "test_cases": {
+        "positive": ["11010519900307234X", "440524188001010014", "我的身份证是33010219950101234X"],
+        "negative": ["12345678", "身份证号码", "ID123456"]
+      }
+    },
+    {
+      "rule_id": "PD002",
+      "rule_name": "中国大陆手机号",
+      "pattern": "1[3-9]\\d{9}",
+      "level": "critical",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 3,
+      "test_cases": {
+        "positive": ["13812345678", "18900001111", "手机号15912345678"],
+        "negative": ["12345678", "电话号码", "手机"]
+      }
+    },
+    {
+      "rule_id": "PD003",
+      "rule_name": "电子邮箱",
+      "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}",
+      "level": "high",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 3,
+      "test_cases": {
+        "positive": ["test@example.com", "user.name@domain.org", "邮箱是abc123@qq.com"],
+        "negative": ["@example", "test@", "邮箱地址"]
+      }
+    },
+    {
+      "rule_id": "PD004",
+      "rule_name": "银行卡号",
+      "pattern": "\\d{16,19}",
+      "level": "critical",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 4,
+      "test_cases": {
+        "positive": ["6225881234567890", "银行卡号6217001234567891234"],
+        "negative": ["123456", "银行卡", "卡号"]
+      }
+    },
+    {
+      "rule_id": "PD005",
+      "rule_name": "IP地址",
+      "pattern": "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}",
+      "level": "medium",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 2,
+      "test_cases": {
+        "positive": ["192.168.1.1", "10.0.0.255", "IP是172.16.254.1"],
+        "negative": ["IP地址", "localhost", "网址"]
+      }
+    },
+    {
+      "rule_id": "PD006",
+      "rule_name": "统一社会信用代码",
+      "pattern": "[0-9A-HJ-NPQRTUWXY]{2}\\d{6}[0-9A-HJ-NPQRTUWXY]{10}",
+      "level": "high",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 4,
+      "test_cases": {
+        "positive": ["91110000MA00ABCD1X", "信用代码91350100M000100Y43"],
+        "negative": ["信用代码", "社会信用", "123456"]
+      }
+    },
+    {
+      "rule_id": "PD007",
+      "rule_name": "中国护照号",
+      "pattern": "[EG]\\d{8}",
+      "level": "high",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 2,
+      "test_cases": {
+        "positive": ["E12345678", "G00000001", "护照号E98765432"],
+        "negative": ["护照", "AB123456", "12345678"]
+      }
+    },
+    {
+      "rule_id": "PD008",
+      "rule_name": "中国车牌号",
+      "pattern": "[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]",
+      "level": "medium",
+      "action": "mask",
+      "mask_char": "*",
+      "mask_keep": 2,
+      "test_cases": {
+        "positive": ["京A12345", "粤B12345D", "沪C12345学"],
+        "negative": ["车牌", "ABC123", "车牌号"]
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "category": "privacy",
+    "subcategory": "pii_china",
+    "description": "中国特定隐私数据正则规则",
+    "total_rules": 8,
+    "total_patterns": 8,
+    "coverage": ["身份证", "手机号", "邮箱", "银行卡", "IP", "社会信用代码", "护照", "车牌"],
+    "created_at": "2026-04-14"
+  }
+}

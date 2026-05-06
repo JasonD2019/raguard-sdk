@@ -1,0 +1,95 @@
+{
+  "rules": [
+    {
+      "rule_id": "INJ021",
+      "rule_name": "间接注入 - 文档嵌入",
+      "rule_type": "keyword",
+      "level": "critical",
+      "lang": "multi",
+      "patterns": [
+        "这篇文档包含隐藏指令",
+        "This document contains hidden instructions",
+        "隐藏在文本中的指令",
+        "Instructions hidden in text",
+        "文档内嵌恶意prompt",
+        "Document embedded malicious prompt",
+        "通过文档传播的注入",
+        "Injection spread through document",
+        "嵌入攻击指令",
+        "Embedded attack instruction",
+        "文档携带的恶意内容",
+        "Document carried malicious content",
+        "文本隐藏的执行命令",
+        "Text hidden execution command"
+      ],
+      "action": "block",
+      "suggestion": "检测到文档嵌入型间接注入，文档中可能包含恶意指令",
+      "confidence_weight": 0.85,
+      "tags": ["owasp-llm-01", "indirect_injection", "document"],
+      "source": "academic"
+    },
+    {
+      "rule_id": "INJ022",
+      "rule_name": "间接注入 - 网页内容",
+      "rule_type": "keyword",
+      "level": "high",
+      "lang": "multi",
+      "patterns": [
+        "网页内容包含指令",
+        "Webpage content contains instructions",
+        "从网页获取的恶意指令",
+        "Malicious instructions from webpage",
+        "爬取内容中的注入",
+        "Injection in crawled content",
+        "HTML隐藏指令",
+        "HTML hidden instruction",
+        "网页注入攻击",
+        "Webpage injection attack",
+        "通过URL注入",
+        "Injection through URL",
+        "外部内容攻击",
+        "External content attack"
+      ],
+      "action": "block",
+      "suggestion": "检测到网页内容型间接注入，外部网页可能包含恶意指令",
+      "confidence_weight": 0.8,
+      "tags": ["owasp-llm-01", "indirect_injection", "webpage"],
+      "source": "academic"
+    },
+    {
+      "rule_id": "INJ023",
+      "rule_name": "间接注入 - 邮件内容",
+      "rule_type": "keyword",
+      "level": "high",
+      "lang": "multi",
+      "patterns": [
+        "邮件内容包含指令",
+        "Email content contains instructions",
+        "邮件隐藏的恶意prompt",
+        "Email hidden malicious prompt",
+        "通过邮件注入",
+        "Injection through email",
+        "邮件正文中的攻击",
+        "Attack in email body",
+        "邮件附件注入",
+        "Email attachment injection",
+        "邮件摘要中的恶意内容",
+        "Malicious content in email summary"
+      ],
+      "action": "block",
+      "suggestion": "检测到邮件内容型间接注入，邮件可能包含恶意指令",
+      "confidence_weight": 0.8,
+      "tags": ["owasp-llm-01", "indirect_injection", "email"],
+      "source": "academic"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "category": "injection",
+    "description": "间接提示词注入规则，检测通过外部内容（文档、网页、邮件）传播的注入",
+    "total_rules": 3,
+    "total_patterns": 33,
+    "sources": ["学术论文", "NVIDIA Garak"],
+    "created_at": "2026-04-14"
+  }
+}

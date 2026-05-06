@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "description": "GraphRAG 逻辑规则库",
+  "logical_rules": {
+    "symmetric": [
+      ["married_to", "married_to"],
+      ["sibling_of", "sibling_of"],
+      ["friend_of", "friend_of"],
+      ["colleague_of", "colleague_of"],
+      ["neighbor_of", "neighbor_of"],
+      ["related_to", "related_to"]
+    ],
+    "asymmetric": [
+      ["parent_of", "child_of"],
+      ["teacher_of", "student_of"],
+      ["boss_of", "subordinate_of"],
+      ["ancestor_of", "descendant_of"],
+      ["created", "created_by"],
+      ["owns", "owned_by"],
+      ["employs", "employed_by"]
+    ],
+    "transitive": [
+      "ancestor_of",
+      "descendant_of",
+      "part_of",
+      "located_in",
+      "contains",
+      "subclass_of",
+      "instance_of",
+      "greater_than",
+      "less_than"
+    ],
+    "incompatible": [
+      ["alive", "dead"],
+      ["male", "female"],
+      ["married", "single"],
+      ["born_in", "died_before"],
+      ["citizen_of", "enemy_of"],
+      ["supports", "opposes"]
+    ]
+  },
+  "common_sense_constraints": [
+    {
+      "pattern": "person.*born_in.*year",
+      "constraint": "year >= 1800",
+      "description": "出生年份不应早于 1800 年（除非历史人物）"
+    },
+    {
+      "pattern": "person.*died_at_age",
+      "constraint": "age > 0 AND age < 150",
+      "description": "死亡年龄应在合理范围内"
+    },
+    {
+      "pattern": "person.*age",
+      "constraint": "age >= 0 AND age <= 150",
+      "description": "年龄应在合理范围内"
+    }
+  ],
+  "entity_type_constraints": {
+    "person": {
+      "required_predicates": ["born_in", "nationality"],
+      "forbidden_predicates": ["located_in"]
+    },
+    "organization": {
+      "required_predicates": ["founded_in"],
+      "forbidden_predicates": ["born_in", "died_on"]
+    },
+    "location": {
+      "required_predicates": [],
+      "forbidden_predicates": ["parent_of", "married_to"]
+    }
+  }
+}
